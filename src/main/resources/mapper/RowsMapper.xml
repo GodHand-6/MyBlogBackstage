@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlgydx.mapper.RowsMapper">
+  <resultMap id="BaseResultMap" type="com.qlgydx.pojo.Row">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="doc" jdbcType="LONGVARCHAR" property="doc" />
+    <result column="date" jdbcType="DATE" property="date"></result>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, doc, date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ${param2}
+    where id = #{param1,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ${param2}
+    where id = #{param1,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="param1.id" parameterType="com.qlgydx.pojo.Row" useGeneratedKeys="true">
+    insert into ${param2} (doc,date)
+    values (#{param1.doc,jdbcType=LONGVARCHAR},#{param1.date,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="param1.id" parameterType="com.qlgydx.pojo.Row" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ${param2}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="param1.doc != null">
+        doc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="param1.doc != null">
+        #{param1.doc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qlgydx.pojo.Row">
+    <!--@mbg.generated-->
+    update ${param2}
+    <set>
+      <if test="param1.doc != null">
+        doc = #{param1.doc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{param1.id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qlgydx.pojo.Row">
+    update ${param2}
+    set doc = #{param1.doc,jdbcType=LONGVARCHAR}
+    where id = #{param1.id,jdbcType=INTEGER}
+  </update>
+</mapper>

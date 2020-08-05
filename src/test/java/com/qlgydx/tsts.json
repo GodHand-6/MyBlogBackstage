@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "doc_id": {
+      "type": "integer"
+    },
+    "doc_name": {
+      "type": "text",
+      "analyzer": "ik_max_word"
+    },
+    "doc_type": {
+      "type": "text"
+    },
+    "doc_date": {
+      "type": "date"
+    }
+  }
+}
